@@ -5,6 +5,16 @@
  */
 'use strict'
 
-import * as io from 'socket.io'
+// Load environment variables from configs/, attach to process.env
+import loadenv from 'loadenv'
+loadenv()
 
-console.log('io', io)
+import {Server} from 'ws'
+
+const wss = new Server({
+  port: process.env.SERVER_PORT
+})
+
+wss.on('connection', () => {
+  console.log('connection')
+})
