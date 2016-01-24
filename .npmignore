@@ -1,0 +1,8 @@
+*.log
+*_test.js
+.DS_Store
+coverage/
+src/
+test-mocks/
+whitelist-all.txt
+whitelist-test.txt
