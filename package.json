@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "loadenv": "^2.1.0",
-    "ws": "^1.0.1"
+    "socket.io": "^1.4.4"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",

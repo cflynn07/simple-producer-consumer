@@ -12,17 +12,8 @@ class Generator extends Socket {
 
     this._initWebsocketClient()
 
-    this.ws.on('open', () => {
-      console.log('open!')
-      this.ws.send('sent message')
-    })
-
-    this.ws.on('close', () => {
-      console.log('close!')
-    })
-
-    this.ws.on('message', () => {
-      console.log('message!')
+    this.ws.emit('event1', 'some data', (data) => {
+      console.log('event1 response', data)
     })
   }
 }

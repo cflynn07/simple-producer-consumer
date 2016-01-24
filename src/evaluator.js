@@ -15,8 +15,9 @@ class Evaluator extends Socket {
 
     this.wss.on('connection', (ws) => {
       console.log('connection')
-      ws.on('message', (data) => {
-        console.log('message!', data)
+      ws.on('event1', (data, cb) => {
+        console.log('data', data)
+        cb('hello')
       })
     })
   }

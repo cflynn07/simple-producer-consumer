@@ -6,8 +6,8 @@
 // Load environment variables from configs/, attach to process.env
 require('loadenv')()
 
-const Websocket = require('ws')
-const Server = Websocket.Server
+const ioClient = require('socket.io-client')
+const ioServer = require('socket.io')
 
 class Socket {
   constructor () {}
@@ -16,14 +16,14 @@ class Socket {
    *
    */
   _initWebsocketClient () {
-    this.ws = this.ws || new Websocket('ws://localhost:' + process.env.SERVER_PORT)
+    this.ws = this.ws || ioClient('ws://localhost:' + process.env.SERVER_PORT)
   }
 
   /**
    *
    */
   _initWebsocketServer () {
-    this.wss = this.wss || new Server({ port: process.env.SERVER_PORT })
+    this.wss = this.wss || ioServer(process.env.SERVER_PORT)
   }
 }
 
