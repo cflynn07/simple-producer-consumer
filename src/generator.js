@@ -5,6 +5,7 @@
 'use strict'
 
 const clear = require('cli-clear')
+const randomItem = require('random-item')
 
 const Output = require('./output')
 const Socket = require('./socket')
@@ -12,6 +13,15 @@ const Socket = require('./socket')
 class Generator extends Socket {
   constructor () {
     super()
+
+    this._operations = [
+      '%',
+      '*',
+      '+',
+      '-',
+      '%'
+    ]
+
     const expressions = []
     this._expressions = expressions
     this._output = new Output(expressions)
@@ -31,7 +41,7 @@ class Generator extends Socket {
         expression.completed = new Date()
         this._output.refresh()
       })
-    }, 1000)
+    }, 150)
   }
 
   /**
@@ -44,9 +54,9 @@ class Generator extends Socket {
   _generateExpression () {
     const expression = {
       index: this._expressions.length,
-      operandA: 1,
-      operation: '/',
-      operandB: 2,
+      operandA: Math.floor(Math.random() * 1000),
+      operation: randomItem(this._operations),
+      operandB: Math.floor(Math.random() * 1000),
       created: new Date(),
       completed: false
     }

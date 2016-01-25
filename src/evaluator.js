@@ -21,7 +21,6 @@ class Evaluator extends Socket {
       })
     })
   }
-
 }
 
 module.exports = new Evaluator()
