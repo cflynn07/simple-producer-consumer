@@ -36,8 +36,8 @@
   },
   "dependencies": {
     "cli-clear": "^1.0.4",
-    "cli-spinner": "^0.2.2",
     "loadenv": "^2.1.0",
+    "random-item": "^1.0.0",
     "socket.io": "^1.4.4"
   },
   "devDependencies": {
