@@ -8,21 +8,19 @@ const Promise = require('bluebird')
 const TCA = require('tailable-capped-array')
 const clear = require('cli-clear')
 const randomItem = require('random-item')
+const times = require('times-loop')
 
+const Base = require('./base')
+const Expression = require('./models/expression')
 const Output = require('./output')
-const Socket = require('./socket')
 
-class Generator extends Socket {
+class Generator extends Base {
   constructor () {
     super()
     this._index = 0
 
     this._expressions = new TCA(10)
     this._output = new Output(this._expressions)
-
-    this._expressions.createReadStream().on('data', () => {
-      this._output.refresh()
-    })
 
     this._initWebsocketClient()
     this._initGenerator()
@@ -34,12 +32,14 @@ class Generator extends Socket {
   _initGenerator () {
     this.interval = this.interval || setInterval(() => {
       const expression = this._generateExpression()
+      this._expressions.push(expression)
       Promise.coroutine(function *() {
-        const result = yield this._sendExpression(expression)
-        this._updateExpressionCompleted(expression, result)
+        const response = yield this._sendExpression(expression)
+        expression.updateWithResponse(response)
         this._output.refresh()
       }.bind(this))()
         .catch((err) => {
+          console.log(err)
           // TODO
         })
     }, 150)
@@ -55,17 +55,26 @@ class Generator extends Socket {
   _generateExpression () {
     const operandMin = -99999
     const operandMax = 99999
-    const expression = {
+
+    const opts = {
       index: this._index++,
-      operandA: Math.floor(Math.random() * (operandMax - operandMin + 1)) + operandMin,
-      operation: randomItem(this._operations),
-      operandB: Math.floor(Math.random() * (operandMax - operandMin + 1)) + operandMin,
+      operands: [],
+      operations: [],
       created: new Date(),
       completed: false,
       result: ''
     }
-    this._expressions.push(expression)
-    return expression
+
+    const n = Math.floor((Math.random() * 3)) + 2 // [2..5]
+    times(n, () => {
+      opts.operands.push(
+        Math.floor(Math.random() * (operandMax - operandMin + 1)) + operandMin
+      )
+    })
+    times(n-1, () => {
+      opts.operations.push(randomItem(Expression.operations))
+    })
+    return new Expression(opts)
   }
 
   /**
@@ -80,16 +89,6 @@ class Generator extends Socket {
         cb(null, data)
       })
     })
-  }
-
-  /**
-   * Mutate expression object with data from response according to logic conditions
-   * @param {Object} expression
-   * @param {Object} response
-   */
-  _updateExpressionCompleted (expression, response) {
-    expression.completed = new Date()
-    expression.result = (response.error) ? response.error : response.result
   }
 }
 

@@ -7,9 +7,11 @@
 
 const math = require('mathjs')
 
-const Socket = require('./socket')
+const Base = require('./base')
+const Expression = require('./models/expression')
+const log = require('./logger')(__filename)
 
-class Evaluator extends Socket {
+class Evaluator extends Base {
   constructor () {
     super()
     this._initWebsocketServer()
@@ -21,19 +23,24 @@ class Evaluator extends Socket {
   /**
    *
    */
-  _evaluateExpression (expression, cb) {
-    const {error, value} = this._validateExpression(expression)
-    if (error) { return cb({ error: error }) }
-    const evalString = [
-      value.operandA,
-      value.operandB
-    ].join(' ' + value.operation + ' ') // Prevent ex: 500--500
+  _evaluateExpression (data, cb) {
+    const expression = new Expression(data)
+    const {error, value} = expression.validate()
+    if (error) {
+      log.error({
+        err: error
+      }, '_evaluateExpression validate error')
+      return cb({ error: error })
+    }
     var evalResult
     try {
-      evalResult = math.eval(evalString)
+      evalResult = math.eval(expression.getExpressionString(false))
     } catch (e) {
       evalResult = e.message
     }
+    log.trace({
+      evalResult: evalResult
+    }, 'evalResult')
     cb({
       error: false,
       result: evalResult
