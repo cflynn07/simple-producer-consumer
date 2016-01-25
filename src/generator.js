@@ -39,6 +39,9 @@ class Generator extends Socket {
         this._updateExpressionCompleted(expression, result)
         this._output.refresh()
       }.bind(this))()
+        .catch((err) => {
+          // TODO
+        })
     }, 150)
   }
 
@@ -80,7 +83,9 @@ class Generator extends Socket {
   }
 
   /**
-   *
+   * Mutate expression object with data from response according to logic conditions
+   * @param {Object} expression
+   * @param {Object} response
    */
   _updateExpressionCompleted (expression, response) {
     expression.completed = new Date()

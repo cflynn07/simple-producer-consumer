@@ -5,6 +5,8 @@
  */
 'use strict'
 
+const math = require('mathjs')
+
 const Socket = require('./socket')
 
 class Evaluator extends Socket {
@@ -25,8 +27,13 @@ class Evaluator extends Socket {
     const evalString = [
       value.operandA,
       value.operandB
-    ].join(value.operation + ' ') // Prevent ex: 500--500
-    const evalResult = eval(evalString)
+    ].join(' ' + value.operation + ' ') // Prevent ex: 500--500
+    var evalResult
+    try {
+      evalResult = math.eval(evalString)
+    } catch (e) {
+      evalResult = e.message
+    }
     cb({
       error: false,
       result: evalResult

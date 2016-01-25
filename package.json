@@ -41,6 +41,7 @@
     "cli-color": "^1.1.0",
     "joi": "^7.2.2",
     "loadenv": "^2.1.0",
+    "mathjs": "^2.6.0",
     "numeral": "^1.5.3",
     "random-item": "^1.0.0",
     "socket.io": "^1.4.4",

@@ -20,7 +20,7 @@ class Socket {
       '*',
       '+',
       '-',
-      '%'
+      '/'
     ]
     this._schemaExpression = Joi.object().keys({
       index: Joi.number().integer(),

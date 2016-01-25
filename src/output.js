@@ -39,20 +39,33 @@ class Output {
       '...'
     const row = [
       expression.index,
-      numeral(expression.operandA).format('0,0'),
+      expression.operandA,
       expression.operation,
-      numeral(expression.operandB).format('0,0'),
-      numeral(expression.result).format('0,0'),
+      expression.operandB,
+      expression.result,
       duration
     ]
-    row[1] = this._colorizeValueBySign(row[1])
-    row[3] = this._colorizeValueBySign(row[3])
-    row[4] = this._colorizeValueBySign(row[4])
+    const defaultNumFormat = '0,0.00'
+    for (let index of [1, 3]) {
+      row[index] = this._colorizeValueBySign(
+        numeral(row[index]).format(defaultNumFormat)
+      )
+    }
+    row[4] = (expression.completed) ?
+      ((/^[-]?[0-9\.]+$/.test(expression.result)) ?
+        /* numeric */
+        row[4] = this._colorizeValueBySign(
+          numeral(row[4]).format(defaultNumFormat)
+        ) :
+        /* non-numeric */
+        expression.result) :
+     '' // placeholder
     return row
   }
 
   /**
-   *
+   * @param {String} numericStringVal
+   * @return String
    */
   _colorizeValueBySign (numericStringVal) {
     return (numericStringVal[0] === '-') ?
