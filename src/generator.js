@@ -50,8 +50,8 @@ class Generator extends Socket {
    *   - operandB
    */
   _generateExpression () {
-    const operandMin = -1000
-    const operandMax = 1000
+    const operandMin = -99999
+    const operandMax = 99999
     const expression = {
       index: this._index++,
       operandA: Math.floor(Math.random() * (operandMax - operandMin + 1)) + operandMin,
