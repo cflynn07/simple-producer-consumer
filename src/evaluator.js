@@ -15,12 +15,13 @@ class Evaluator extends Socket {
 
     this.wss.on('connection', (ws) => {
       console.log('connection')
-      ws.on('event1', (data, cb) => {
+      ws.on('expression', (data, cb) => {
         console.log('data', data)
         cb('hello')
       })
     })
   }
+
 }
 
 module.exports = new Evaluator()
