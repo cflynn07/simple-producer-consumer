@@ -4,6 +4,7 @@
  */
 'use strict'
 
+const TCA = require('tailable-capped-array')
 const clear = require('cli-clear')
 const randomItem = require('random-item')
 
@@ -14,6 +15,7 @@ class Generator extends Socket {
   constructor () {
     super()
 
+    this._index = 0
     this._operations = [
       '%',
       '*',
@@ -22,9 +24,12 @@ class Generator extends Socket {
       '%'
     ]
 
-    const expressions = []
-    this._expressions = expressions
-    this._output = new Output(expressions)
+    this._expressions = new TCA(10)
+    this._output = new Output(this._expressions)
+
+    this._expressions.createReadStream().on('data', () => {
+      this._output.refresh()
+    })
 
     this._initWebsocketClient()
     this._initGenerator()
@@ -36,7 +41,6 @@ class Generator extends Socket {
   _initGenerator () {
     this.interval = this.interval || setInterval(() => {
       const expression = this._generateExpression()
-      this._output.refresh()
       this._sendExpression(expression, () => {
         expression.completed = new Date()
         this._output.refresh()
@@ -53,7 +57,7 @@ class Generator extends Socket {
    */
   _generateExpression () {
     const expression = {
-      index: this._expressions.length,
+      index: this._index++,
       operandA: Math.floor(Math.random() * 1000),
       operation: randomItem(this._operations),
       operandB: Math.floor(Math.random() * 1000),

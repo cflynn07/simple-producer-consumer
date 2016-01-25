@@ -10,16 +10,33 @@ const Socket = require('./socket')
 class Evaluator extends Socket {
   constructor () {
     super()
-
     this._initWebsocketServer()
-
     this.wss.on('connection', (ws) => {
-      console.log('connection')
-      ws.on('expression', (data, cb) => {
-        console.log('data', data)
+      ws.on('expression', (expression, cb) => {
+        this._evaluateExpression(expression)
         cb('hello')
       })
     })
+  }
+
+  /**
+   *
+   */
+  _evaluateExpression ({ operation=false }) {
+    console.log(arguments)
+    if (!operation) {
+      console.log('error')
+    }
+    switch (operator) {
+      case '%':
+        break;
+      case '*':
+        break;
+      case '+':
+        break;
+      case '-':
+        break;
+    }
   }
 }
 

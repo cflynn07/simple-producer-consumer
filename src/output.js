@@ -19,12 +19,12 @@ class Output {
     const table = new Table({
       head: ['ID', 'OperandA', 'Operation', 'OperandB', 'Duration (ms)']
     })
-    for (let i = Math.max(this._expressions.length - 11, 0),
-         len = this._expressions.length; i < len; i++) {
-      table.push(this._getRowFromExpression(this._expressions[i]))
-    }
+    table.push(...this._expressions.toArray().map(this._getRowFromExpression))
     clear()
-    console.log(table.toString())
+    console.log([
+      'Generating expressions... (showing last 10)',
+      table.toString()
+    ].join('\n'))
   }
 
   /**
@@ -32,8 +32,9 @@ class Output {
    * @returns String[]
    */
   _getRowFromExpression (expression) {
-    const duration = (!expression.completed) ? '%s' :
-      (expression.completed - expression.created)
+    const duration = (expression.completed) ?
+      (expression.completed - expression.created) :
+      '...'
     return [
       expression.index,
       expression.operandA,
