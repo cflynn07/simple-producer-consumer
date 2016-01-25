@@ -12,31 +12,25 @@ class Evaluator extends Socket {
     super()
     this._initWebsocketServer()
     this.wss.on('connection', (ws) => {
-      ws.on('expression', (expression, cb) => {
-        this._evaluateExpression(expression)
-        cb('hello')
-      })
+      ws.on('expression', this._evaluateExpression.bind(this))
     })
   }
 
   /**
    *
    */
-  _evaluateExpression ({ operation=false }) {
-    console.log(arguments)
-    if (!operation) {
-      console.log('error')
-    }
-    switch (operator) {
-      case '%':
-        break;
-      case '*':
-        break;
-      case '+':
-        break;
-      case '-':
-        break;
-    }
+  _evaluateExpression (expression, cb) {
+    const {error, value} = this._validateExpression(expression)
+    if (error) { return cb({ error: error }) }
+    const evalString = [
+      value.operandA,
+      value.operandB
+    ].join(value.operation + ' ') // Prevent ex: 500--500
+    const evalResult = eval(evalString)
+    cb({
+      error: false,
+      result: evalResult
+    })
   }
 }
 

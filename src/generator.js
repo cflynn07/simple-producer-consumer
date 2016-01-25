@@ -4,6 +4,7 @@
  */
 'use strict'
 
+const Promise = require('bluebird')
 const TCA = require('tailable-capped-array')
 const clear = require('cli-clear')
 const randomItem = require('random-item')
@@ -14,15 +15,7 @@ const Socket = require('./socket')
 class Generator extends Socket {
   constructor () {
     super()
-
     this._index = 0
-    this._operations = [
-      '%',
-      '*',
-      '+',
-      '-',
-      '%'
-    ]
 
     this._expressions = new TCA(10)
     this._output = new Output(this._expressions)
@@ -41,10 +34,11 @@ class Generator extends Socket {
   _initGenerator () {
     this.interval = this.interval || setInterval(() => {
       const expression = this._generateExpression()
-      this._sendExpression(expression, () => {
-        expression.completed = new Date()
+      Promise.coroutine(function *() {
+        const result = yield this._sendExpression(expression)
+        this._updateExpressionCompleted(expression, result)
         this._output.refresh()
-      })
+      }.bind(this))()
     }, 150)
   }
 
@@ -56,13 +50,16 @@ class Generator extends Socket {
    *   - operandB
    */
   _generateExpression () {
+    const operandMin = -1000
+    const operandMax = 1000
     const expression = {
       index: this._index++,
-      operandA: Math.floor(Math.random() * 1000),
+      operandA: Math.floor(Math.random() * (operandMax - operandMin + 1)) + operandMin,
       operation: randomItem(this._operations),
-      operandB: Math.floor(Math.random() * 1000),
+      operandB: Math.floor(Math.random() * (operandMax - operandMin + 1)) + operandMin,
       created: new Date(),
-      completed: false
+      completed: false,
+      result: ''
     }
     this._expressions.push(expression)
     return expression
@@ -71,8 +68,23 @@ class Generator extends Socket {
   /**
    * Send formatted expressions to evaluator
    */
-  _sendExpression (expression, cb) {
-    this.ws.emit('expression', expression, cb)
+  _sendExpression (expression) {
+    return Promise.fromCallback((cb) => {
+      this.ws.emit('expression', expression, (data) => {
+        if (data.error) {
+          return cb(new Error(data.error))
+        }
+        cb(null, data)
+      })
+    })
+  }
+
+  /**
+   *
+   */
+  _updateExpressionCompleted (expression, response) {
+    expression.completed = new Date()
+    expression.result = (response.error) ? response.error : response.result
   }
 }
 

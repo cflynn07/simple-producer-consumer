@@ -17,7 +17,7 @@ class Output {
    */
   refresh () {
     const table = new Table({
-      head: ['ID', 'OperandA', 'Operation', 'OperandB', 'Duration (ms)']
+      head: ['ID', 'OperandA', 'Operation', 'OperandB', 'Result', 'Duration (ms)']
     })
     table.push(...this._expressions.toArray().map(this._getRowFromExpression))
     clear()
@@ -40,6 +40,7 @@ class Output {
       expression.operandA,
       expression.operation,
       expression.operandB,
+      expression.result,
       duration
     ]
   }
