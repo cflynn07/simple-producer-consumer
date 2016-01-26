@@ -32,14 +32,16 @@ class Evaluator extends Base {
       }, '_evaluateExpression validate error')
       return cb({ error: error })
     }
+    const expressionString = expression.getExpressionString(false)
     var evalResult
     try {
-      evalResult = math.eval(expression.getExpressionString(false))
+      evalResult = math.eval(expressionString)
     } catch (e) {
       evalResult = e.message
     }
     log.trace({
-      evalResult: evalResult
+      evalResult: evalResult,
+      expressionString: expressionString
     }, 'evalResult')
     cb({
       error: false,
