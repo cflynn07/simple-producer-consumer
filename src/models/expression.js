@@ -38,13 +38,16 @@ class Expression {
   }
 
   /**
-   *
+   * Produce an expression string from this object's data
+   * Optionally format to colorize
+   * @param {Boolean} colorize
+   * @return String
    */
-  getExpressionString (format) {
+  getExpressionString (colorize) {
     const expressionStringArray = []
     for (let i = 0, len = this._attrs.operands.length; i < len; i++) {
       expressionStringArray.push(
-        (format) ? this._colorizeValueBySign(this._attrs.operands[i]) : this._attrs.operands[i]
+        (colorize) ? this._colorizeValueBySign(this._attrs.operands[i]) : this._attrs.operands[i]
       )
       if (this._attrs.operations[i]) {
         expressionStringArray.push(this._attrs.operations[i])
@@ -54,14 +57,16 @@ class Expression {
   }
 
   /**
-   *
+   * return _attrs
+   * @return Object
    */
   toJSON () {
     return this._attrs
   }
 
   /**
-   *
+   * Update instance data with response
+   * @param {Object} response
    */
   updateWithResponse (response) {
     this._attrs.completed = new Date()
@@ -73,7 +78,8 @@ class Expression {
   }
 
   /**
-   *
+   * Returns array representing this Expression in a table
+   * @returns {Array}
    */
   getOutputRow () {
     const duration = (this._attrs.completed) ?
