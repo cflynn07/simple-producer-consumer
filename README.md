@@ -7,7 +7,7 @@ simple-producer-consumer
 [![Dependency Status](https://david-dm.org/cflynn07/simple-producer-consumer.svg)](https://david-dm.org/cflynn07/simple-producer-consumer)
 [![devDependency Status](https://david-dm.org/cflynn07/simple-producer-consumer/dev-status.svg)](https://david-dm.org/cflynn07/simple-producer-consumer#info=devDependencies)
 
-[![NPM](https://nodei.co/npm/array-subtract.png?compact=true)](https://nodei.co/npm/array-subtract/)
+[![NPM](https://nodei.co/npm/simple-producer-consumer.png?compact=true)](https://nodei.co/npm/simple-producer-consumer/)
 
 A project to demonstrate bi-directional asynchronous network communication between independent
 Node.js processes.
