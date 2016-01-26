@@ -92,4 +92,4 @@ class Generator extends Base {
   }
 }
 
-module.exports = new Generator()
+module.exports = Generator

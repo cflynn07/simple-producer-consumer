@@ -6,21 +6,23 @@
 
 const Joi = require('joi')
 const clc = require('cli-color')
+const keypather = require('keypather')()
 const numeral = require('numeral')
 
 class Expression {
   constructor (attrs) {
     this._attrs = attrs
+    const operandsLength = keypather.get(attrs, 'operands.length') || 1
     this._schema = Joi.object().keys({
       index: Joi.number().integer(),
       operands: Joi
         .array()
         .items(Joi.number().integer())
-        .length(attrs.operands.length),
+        .length(operandsLength),
       operations: Joi
         .array()
         .items(Joi.any().valid(Expression.operations))
-        .length(attrs.operands.length-1),
+        .length(operandsLength - 1),
       created: Joi.date(),
       completed: Joi.any(),
       result: Joi.any()
@@ -38,7 +40,7 @@ class Expression {
   /**
    *
    */
-  getExpressionString (format=true) {
+  getExpressionString (format) {
     const expressionStringArray = []
     for (let i = 0, len = this._attrs.operands.length; i < len; i++) {
       expressionStringArray.push(

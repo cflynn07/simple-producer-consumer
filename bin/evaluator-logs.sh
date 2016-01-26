@@ -1,2 +1,3 @@
 #!/usr/bin/env node
-require('../lib/evaluator')
+const Evaluator = require('../lib/evaluator')
+const evaluator = new Evaluator()

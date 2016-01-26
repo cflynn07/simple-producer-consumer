@@ -14,8 +14,8 @@ const log = require('./logger')(__filename)
 class Evaluator extends Base {
   constructor () {
     super()
-    this._initWebsocketServer()
-    this.wss.on('connection', (ws) => {
+    const wss = this._initWebsocketServer()
+    wss.on('connection', (ws) => {
       ws.on('expression', this._evaluateExpression.bind(this))
     })
   }
@@ -25,12 +25,14 @@ class Evaluator extends Base {
    */
   _evaluateExpression (data, cb) {
     const expression = new Expression(data)
-    const {error, value} = expression.validate()
-    if (error) {
+    // TODO: Patch istanbul to recognize ES6 destructuring assignment
+    // const {error} = expression.validate()
+    const validateResult = expression.validate()
+    if (validateResult.error) {
       log.error({
-        err: error
+        err: validateResult.error
       }, '_evaluateExpression validate error')
-      return cb({ error: error })
+      return cb({ error: validateResult.error })
     }
     const expressionString = expression.getExpressionString(false)
     var evalResult
@@ -50,4 +52,4 @@ class Evaluator extends Base {
   }
 }
 
-module.exports = new Evaluator()
+module.exports = Evaluator

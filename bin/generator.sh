@@ -1,2 +1,3 @@
 #!/usr/bin/env node
-require('../lib/generator')
+const Generator = require('../lib/generator')
+const generator = new Generator()

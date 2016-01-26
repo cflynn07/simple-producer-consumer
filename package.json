@@ -10,8 +10,8 @@
   },
   "scripts": {
     "build": "babel ./src -d ./lib",
-    "evaluator": "npm run build && SPC_LOG_LEVEL_STDOUT=trace node lib/evaluator.js | bunyan -o json --strict | json -ga module msg evalResult",
-    "generator": "npm run build && node lib/generator.js",
+    "evaluator": "npm run build && SPC_LOG_LEVEL_STDOUT=trace node bin/evaluator-logs.sh | bunyan -o json --strict | json -ga module msg evalResult",
+    "generator": "npm run build && node bin/generator.sh",
     "lint": "npm run whitelist-generate-all; standard -v `cat ./whitelist-all.txt`; npm run whitelist-remove",
     "prepublish": "npm run build",
     "test": "npm run lint; npm run whitelist-generate-test; istanbul cover _mocha `cat ./whitelist-test.txt`; npm run whitelist-remove; istanbul check-coverage --statement 100 --branch 100 --function 100 --line 100",
@@ -50,6 +50,7 @@
     "cli-color": "^1.1.0",
     "cli-table": "^0.3.1",
     "joi": "^7.2.2",
+    "keypather": "^1.10.2",
     "loadenv": "^2.1.0",
     "mathjs": "^2.6.0",
     "numeral": "^1.5.3",

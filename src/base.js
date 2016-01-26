@@ -18,6 +18,7 @@ class Base {
    */
   _initWebsocketClient () {
     this.ws = this.ws || ioClient('ws://localhost:' + process.env.SPC_SERVER_PORT)
+    return this.ws
   }
 
   /**
@@ -25,6 +26,7 @@ class Base {
    */
   _initWebsocketServer () {
     this.wss = this.wss || ioServer(process.env.SPC_SERVER_PORT)
+    return this.wss
   }
 }
 
