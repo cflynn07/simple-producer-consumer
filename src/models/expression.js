@@ -70,11 +70,11 @@ class Expression {
    */
   updateWithResponse (response) {
     this._attrs.completed = new Date()
-    this._attrs.result = (response.error) ?
-      response.error :
-      (/^[-]?[0-9\.]+$/.test(response.result)) ?
-        this._colorizeValueBySign(response.result) : // numeric
-        response.result // non-numeric
+    this._attrs.result = (response.error)
+      ? response.error
+      : (/^[-]?[0-9\.]+$/.test(response.result))
+        ? this._colorizeValueBySign(response.result) // numeric
+        : response.result // non-numeric
   }
 
   /**
@@ -82,9 +82,9 @@ class Expression {
    * @returns {Array}
    */
   getOutputRow () {
-    const duration = (this._attrs.completed) ?
-      (this._attrs.completed - this._attrs.created) :
-      '...'
+    const duration = (this._attrs.completed)
+      ? (this._attrs.completed - this._attrs.created)
+      : '...'
     const row = [
       this._attrs.index,
       this.getExpressionString(),
@@ -100,9 +100,9 @@ class Expression {
    */
   _colorizeValueBySign (num) {
     const numString = numeral(num).format('0,0')
-    return (numString [0] === '-') ?
-      clc.red(numString) :
-      clc.green(numString)
+    return (numString [0] === '-')
+      ? clc.red(numString)
+      : clc.green(numString)
   }
 }
 

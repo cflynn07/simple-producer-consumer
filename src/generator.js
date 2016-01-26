@@ -6,7 +6,6 @@
 
 const Promise = require('bluebird')
 const TCA = require('tailable-capped-array')
-const clear = require('cli-clear')
 const randomItem = require('random-item')
 const times = require('times-loop')
 
@@ -67,7 +66,7 @@ class Generator extends Base {
         Math.floor(Math.random() * (operandMax - operandMin + 1)) + operandMin
       )
     })
-    times(n-1, () => {
+    times(n - 1, () => {
       opts.operations.push(randomItem(Expression.operations))
     })
     return new Expression(opts)

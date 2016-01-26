@@ -111,7 +111,6 @@ describe('src/generator', () => {
         })
       }
       const expression = {}
-      const catchStub = sinon.stub()
       const promise = generator._sendExpression(expression)
         .catch(() => {})
       sinon.assert.calledOnce(generator._ws.emit)

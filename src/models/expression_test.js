@@ -59,7 +59,7 @@ describe('src/models/expression', () => {
     test.object(validResult).match({
       valid: true
     })
-    test.object(validResult).match({
+    test.object(invalidResult).match({
       valid: false
     })
   })
