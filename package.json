@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "A simple demo of producer and consumer node.js services",
   "main": "consumer.js",
+  "bin": {
+    "spc-evaluator": "./bin/evaluator.sh",
+    "spc-evaluator-logs": "./bin/evaluator-logs.sh",
+    "spc-generator": "./bin/generator.sh"
+  },
   "scripts": {
     "build": "babel ./src -d ./lib",
     "evaluator": "npm run build && SPC_LOG_LEVEL_STDOUT=trace node lib/evaluator.js | bunyan -o json --strict | json -ga module msg evalResult",
@@ -43,6 +48,7 @@
     "bunyan": "^1.5.1",
     "cli-clear": "^1.0.4",
     "cli-color": "^1.1.0",
+    "cli-table": "^0.3.1",
     "joi": "^7.2.2",
     "loadenv": "^2.1.0",
     "mathjs": "^2.6.0",
