@@ -14,7 +14,8 @@ class Base {
   constructor () {}
 
   /**
-   *
+   * Initialize a websocket client singleton instance
+   * @returns Object
    */
   _initWebsocketClient () {
     this._ws = this._ws || Base._ioClient('ws://localhost:' + process.env.SPC_SERVER_PORT)
@@ -22,7 +23,8 @@ class Base {
   }
 
   /**
-   *
+   * Initialize a websocket server singleton instance
+   * @returns Object
    */
   _initWebsocketServer () {
     this._wss = this._wss || Base._ioServer(process.env.SPC_SERVER_PORT)
