@@ -12,7 +12,10 @@ const streams = [{
 }]
 
 /**
- *
+ * Exports a function that will return a new child instance of bunyan w/ a relative path for
+ * the module name
+ * @param {String} modulePath
+ * @return Object
  */
 module.exports = (modulePath) => {
   return bunyan.createLogger({

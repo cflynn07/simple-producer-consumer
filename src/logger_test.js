@@ -10,7 +10,6 @@ const logger = require('./logger')
 const sinon = test.sinon
 
 describe('src/logger', () => {
-
   it('load', () => {
     test.function(logger)
   })
