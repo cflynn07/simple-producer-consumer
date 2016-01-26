@@ -24,12 +24,15 @@ class Output {
       head: ['ID', 'Operation', 'Result', 'Duration (ms)']
     })
     table.push(...this._expressions.toArray().map(pluck('getOutputRow()')))
-    clear()
+    Output._clear()
     console.log([
       `Generating expressions... (showing last ${process.env.SPC_EXPRESSION_DISPLAY_COUNT})`,
       table.toString()
     ].join('\n'))
   }
 }
+
+// For unit tests
+Output._clear = clear
 
 module.exports = Output
