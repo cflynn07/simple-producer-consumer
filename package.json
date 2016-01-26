@@ -5,7 +5,7 @@
   "main": "consumer.js",
   "scripts": {
     "build": "babel ./src -d ./lib",
-    "evaluator": "npm run build && node lib/evaluator.js | bunyan -o json --strict | json -ga module msg evalResult",
+    "evaluator": "npm run build && SPC_LOG_LEVEL_STDOUT=trace node lib/evaluator.js | bunyan -o json --strict | json -ga module msg evalResult",
     "generator": "npm run build && node lib/generator.js",
     "lint": "npm run whitelist-generate-all; standard -v `cat ./whitelist-all.txt`; npm run whitelist-remove",
     "prepublish": "npm run build",
