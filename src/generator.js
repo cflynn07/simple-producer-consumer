@@ -38,10 +38,6 @@ class Generator extends Base {
         expression.updateWithResponse(response)
         this._output.refresh()
       }.bind(this))()
-        .catch((err) => {
-          console.log(err)
-          // TODO
-        })
     }, 150)
   }
 

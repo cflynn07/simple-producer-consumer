@@ -1,9 +1,8 @@
 /**
- * @module src/evaluator
+ * @module src/evaluator_test
  */
 'use strict'
 
-const math = require('mathjs')
 const test = require('unit.js')
 
 const Base = require('./base')
@@ -34,7 +33,6 @@ describe('src/evaluator', () => {
   it('load', () => {
     test.function(Evaluator).hasName('Evaluator')
     test.object(evaluator).isInstanceOf(Evaluator)
-    sinon.assert.calledOnce(Base.prototype._initWebsocketServer)
   })
 
   describe('Evaluator constructor', () => {

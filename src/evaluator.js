@@ -21,7 +21,9 @@ class Evaluator extends Base {
   }
 
   /**
-   *
+   * Instantiates an Expression, validates, computes the result and responds to the client
+   * @param {Object} data
+   * @param {Function} cb
    */
   _evaluateExpression (data, cb) {
     const expression = new Expression(data)
