@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "4.0"
+  - "4.1"
+  - "4.2"
+  - "5.0"
+  - "5.1"
+  - "5.2"
+  - "5.3"
+  - "5.4"
+script:
+  - npm run test
+before_install:
+  - pip install --user codecov
+after_success:
+  - codecov
