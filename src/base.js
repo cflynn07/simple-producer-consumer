@@ -17,17 +17,21 @@ class Base {
    *
    */
   _initWebsocketClient () {
-    this.ws = this.ws || ioClient('ws://localhost:' + process.env.SPC_SERVER_PORT)
-    return this.ws
+    this._ws = this._ws || Base._ioClient('ws://localhost:' + process.env.SPC_SERVER_PORT)
+    return this._ws
   }
 
   /**
    *
    */
   _initWebsocketServer () {
-    this.wss = this.wss || ioServer(process.env.SPC_SERVER_PORT)
-    return this.wss
+    this._wss = this._wss || Base._ioServer(process.env.SPC_SERVER_PORT)
+    return this._wss
   }
 }
+
+// For unit tests
+Base._ioClient = ioClient
+Base._ioServer = ioServer
 
 module.exports = Base

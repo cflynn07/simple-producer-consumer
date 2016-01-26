@@ -91,13 +91,13 @@ describe('src/generator', () => {
 
   describe('Generator.prototype._sendExpression', () => {
     it('should return a promise that resolves when socket message response is received', () => {
-      generator.ws = {
+      generator._ws = {
         emit: sinon.stub().yields({})
       }
       const expression = {}
       const promise = generator._sendExpression(expression)
-      sinon.assert.calledOnce(generator.ws.emit)
-      sinon.assert.calledWith(generator.ws.emit, 'expression', expression, sinon.match.func)
+      sinon.assert.calledOnce(generator._ws.emit)
+      sinon.assert.calledWith(generator._ws.emit, 'expression', expression, sinon.match.func)
       test.object(promise).match({
         isFulfilled: true,
         isRejected: false
@@ -105,7 +105,7 @@ describe('src/generator', () => {
     })
 
     it('should resolve with error if response indicates error', () => {
-      generator.ws = {
+      generator._ws = {
         emit: sinon.stub().yields({
           error: true
         })
@@ -114,8 +114,8 @@ describe('src/generator', () => {
       const catchStub = sinon.stub()
       const promise = generator._sendExpression(expression)
         .catch(() => {})
-      sinon.assert.calledOnce(generator.ws.emit)
-      sinon.assert.calledWith(generator.ws.emit, 'expression', expression, sinon.match.func)
+      sinon.assert.calledOnce(generator._ws.emit)
+      sinon.assert.calledWith(generator._ws.emit, 'expression', expression, sinon.match.func)
       test.object(promise).match({
         isFulfilled: true,
         isRejected: true

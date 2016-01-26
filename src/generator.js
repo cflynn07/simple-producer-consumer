@@ -78,7 +78,7 @@ class Generator extends Base {
    */
   _sendExpression (expression) {
     return Promise.fromCallback((cb) => {
-      this.ws.emit('expression', expression, (data) => {
+      this._ws.emit('expression', expression, (data) => {
         if (data.error) {
           return cb(new Error(data.error))
         }
