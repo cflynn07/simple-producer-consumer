@@ -26,7 +26,7 @@ class Output {
     table.push(...this._expressions.toArray().map(pluck('getOutputRow()')))
     clear()
     console.log([
-      'Generating expressions... (showing last 10)',
+      `Generating expressions... (showing last ${process.env.SPC_EXPRESSION_DISPLAY_COUNT})`,
       table.toString()
     ].join('\n'))
   }

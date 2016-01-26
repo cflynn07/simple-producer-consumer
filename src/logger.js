@@ -7,7 +7,7 @@ const bunyan = require('bunyan')
 const path = require('path')
 
 const streams = [{
-  level: process.env.LOG_LEVEL_STDOUT,
+  level: process.env.SPC_LOG_LEVEL_STDOUT,
   stream: process.stdout
 }]
 

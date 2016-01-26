@@ -17,14 +17,14 @@ class Base {
    *
    */
   _initWebsocketClient () {
-    this.ws = this.ws || ioClient('ws://localhost:' + process.env.SERVER_PORT)
+    this.ws = this.ws || ioClient('ws://localhost:' + process.env.SPC_SERVER_PORT)
   }
 
   /**
    *
    */
   _initWebsocketServer () {
-    this.wss = this.wss || ioServer(process.env.SERVER_PORT)
+    this.wss = this.wss || ioServer(process.env.SPC_SERVER_PORT)
   }
 }
 

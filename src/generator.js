@@ -19,7 +19,7 @@ class Generator extends Base {
     super()
     this._index = 0
 
-    this._expressions = new TCA(10)
+    this._expressions = new TCA(process.env.SPC_EXPRESSION_DISPLAY_COUNT)
     this._output = new Output(this._expressions)
 
     this._initWebsocketClient()
