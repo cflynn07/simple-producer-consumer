@@ -72,7 +72,7 @@ describe('src/generator', () => {
         id: 1
       })
 
-      clock.tick(200)
+      clock.tick(process.env.SPC_GENERATOR_INTERVAL + 1)
       promiseResolveFn({})
       sinon.assert.calledOnce(generator._generateExpression)
       sinon.assert.calledOnce(generator._sendExpression)
