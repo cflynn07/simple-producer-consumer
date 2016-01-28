@@ -24,7 +24,7 @@ Demonstration
 Usage
 -----
 
-### Option 1 - Run generator and evaluator processes locally on same machine
+#### Option 1 - Run generator and evaluator processes locally on same machine
 ```bash
 # Install the npm module globally (may need to run as root via sudo)
 $ npm install simple-producer-consumer@latest -g
@@ -34,7 +34,7 @@ $ spc-evaluator
 $ spc-generator
 ```
 
-### Option 2 - Run the generator and connect to a hosted evaluator process running on an AWS EC2 server
+#### Option 2 - Run the generator and connect to a hosted evaluator process running on an AWS EC2 server
 ```bash
 # Install the npm module globally (may need to run as root via sudo)
 $ npm install simple-producer-consumer@latest -g
@@ -42,7 +42,7 @@ $ npm install simple-producer-consumer@latest -g
 $ SPC_SERVER_HOST=ec2-52-27-77-162.us-west-2.compute.amazonaws.com spc-generator
 ```
 
-### Option 3 - Clone the repo, build the module and run without installing globally on your system
+#### Option 3 - Clone the repo, build the module and run without installing globally on your system
 ```bash
 $ git clone git@github.com:cflynn07/simple-producer-consumer.git
 $ cd ./simple-producer-consumer
@@ -72,6 +72,11 @@ SPC_LOG_LEVEL_STDOUT=none
 SPC_SERVER_HOST=localhost
 SPC_SERVER_PORT=3001
 ```
+
+UML Diagrams
+------------
+#### Sequence
+![UML_Sequence](https://raw.githubusercontent.com/cflynn07/simple-producer-consumer/master/UML_Sequence.png)
 
 License
 -------
