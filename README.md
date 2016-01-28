@@ -61,6 +61,18 @@ $ npm run test
 $ npm run test-html-cov # Will auto-open Google Chrome with test coverage data on OSX
 ```
 
+Configuration
+-------------
+Configuration options can be overriden by enviroment variables. Default values are defined in
+`configs/.env`
+```bash
+SPC_EXPRESSION_DISPLAY_COUNT=10
+SPC_GENERATOR_INTERVAL=250
+SPC_LOG_LEVEL_STDOUT=none
+SPC_SERVER_HOST=localhost
+SPC_SERVER_PORT=3001
+```
+
 License
 -------
 MIT
