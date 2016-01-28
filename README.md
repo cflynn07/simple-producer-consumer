@@ -55,6 +55,11 @@ $ npm run generator
 
 Tests
 -----
+Unit tests use Mocha, Unit.js and Istanbul
+```bash
+$ npm run test
+$ npm run test-html-cov # Will auto-open Google Chrome with test coverage data on OSX
+```
 
 License
 -------
