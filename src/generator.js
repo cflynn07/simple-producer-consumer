@@ -37,7 +37,7 @@ class Generator extends Base {
         expression.updateWithResponse(response)
         this._output.refresh()
       }.bind(this))()
-    }, 150)
+    }, process.env.SPC_GENERATOR_INTERVAL)
   }
 
   /**
