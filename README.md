@@ -21,9 +21,12 @@ Demonstration
 -------------
 [![asciicast](https://asciinema.org/a/3dmqbxi0n8t0fk8gfab0bw99k.png)](https://asciinema.org/a/3dmqbxi0n8t0fk8gfab0bw99k)
 
+Requirements
+------------
+ - Node.js v4.0.0 or later
+
 Usage
 -----
-
 #### Option 1 - Run generator and evaluator processes locally on same machine
 ```bash
 # Install the npm module globally (may need to run as root via sudo)
