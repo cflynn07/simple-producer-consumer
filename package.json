@@ -1,6 +1,6 @@
 {
   "name": "simple-producer-consumer",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A simple demo of producer and consumer node.js services",
   "main": "consumer.js",
   "bin": {
