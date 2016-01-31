@@ -42,7 +42,7 @@ $ spc-generator
 # Install the npm module globally (may need to run as root via sudo)
 $ npm install simple-producer-consumer@latest -g
 # Start the generator process (in a different terminal window)
-$ SPC_SERVER_HOST=ec2-52-27-77-162.us-west-2.compute.amazonaws.com spc-generator
+$ SPC_SERVER_HOST=ec2-52-35-48-3.us-west-2.compute.amazonaws.com spc-generator
 ```
 
 #### Option 3 - Clone the repo, build the module and run without installing globally on your system
