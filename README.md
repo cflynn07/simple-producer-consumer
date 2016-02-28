@@ -7,7 +7,6 @@ simple-producer-consumer
 [![Dependency Status](https://david-dm.org/cflynn07/simple-producer-consumer.svg)](https://david-dm.org/cflynn07/simple-producer-consumer)
 [![devDependency Status](https://david-dm.org/cflynn07/simple-producer-consumer/dev-status.svg)](https://david-dm.org/cflynn07/simple-producer-consumer#info=devDependencies)
 
-#### CI Servers
 Jenkins  
 [![Build Status (Jenkins)](http://52.36.217.21/buildStatus/icon?job=simple-producer-consumer&build=20)](http://52.36.217.21/job/simple-producer-consumer/20/)  
 Travis CI  
