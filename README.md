@@ -1,11 +1,17 @@
 simple-producer-consumer
 ========================
+
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![Build Status](https://travis-ci.org/cflynn07/simple-producer-consumer.svg)](https://travis-ci.org/cflynn07/simple-producer-consumer)
 [![Code Climate](https://codeclimate.com/github/cflynn07/simple-producer-consumer/badges/gpa.svg)](https://codeclimate.com/github/cflynn07/simple-producer-consumer)
 [![codecov.io](https://codecov.io/github/cflynn07/simple-producer-consumer/coverage.svg?branch=master)](https://codecov.io/github/cflynn07/simple-producer-consumer?branch=master)
 [![Dependency Status](https://david-dm.org/cflynn07/simple-producer-consumer.svg)](https://david-dm.org/cflynn07/simple-producer-consumer)
 [![devDependency Status](https://david-dm.org/cflynn07/simple-producer-consumer/dev-status.svg)](https://david-dm.org/cflynn07/simple-producer-consumer#info=devDependencies)
+
+#### CI Servers
+Jenkins  
+[![Build Status (Jenkins)](http://52.36.217.21/buildStatus/icon?job=simple-producer-consumer&build=20)](http://52.36.217.21/job/simple-producer-consumer/20/)  
+Travis CI  
+[![Build Status (Travis CI)](https://travis-ci.org/cflynn07/simple-producer-consumer.svg)](https://travis-ci.org/cflynn07/simple-producer-consumer)
 
 [![NPM](https://nodei.co/npm/simple-producer-consumer.png?compact=true)](https://nodei.co/npm/simple-producer-consumer/)
 
