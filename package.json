@@ -15,6 +15,7 @@
     "lint": "npm run whitelist-generate-all; standard -v `cat ./whitelist-all.txt`; npm run whitelist-remove",
     "prepublish": "npm run build",
     "test": "npm run lint; npm run whitelist-generate-test; istanbul cover _mocha `cat ./whitelist-test.txt` && istanbul report clover; npm run whitelist-remove; istanbul check-coverage --statement 100 --branch 100 --function 100 --line 100",
+    "test-clover": "istanbul report clover",
     "test-html-cov": "npm run whitelist-generate-test; istanbul cover _mocha `cat ./whitelist-test.txt`; npm run whitelist-remove; open -a 'Google Chrome' coverage/lcov-report/index.html",
     "test-tap": "npm run whitelist-generate-test; _mocha --reporter tap `cat ./whitelist-test.txt` | tee coverage/test.tap; npm run whitelist-remove",
     "whitelist-generate-all": "find ./src -name '*.js' > ./whitelist-all.txt",
