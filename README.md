@@ -65,8 +65,12 @@ Tests
 -----
 Unit tests use Mocha, Unit.js and Istanbul
 ```bash
+# Run tests on host OS
 $ npm run test
 $ npm run test-html-cov # Will auto-open Google Chrome with test coverage data on OSX
+# Run tests in docker container (recommended)
+# Docker must be install & running
+$ npm run test-docker # runs tests in container based on image: node:5.7.0
 ```
 
 Configuration
