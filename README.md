@@ -28,7 +28,7 @@ Demonstration
 
 Requirements
 ------------
- - Node.js v4.0.0 or later
+ - Node.js (minimum v4.0.0) or Docker
 
 Usage
 -----
@@ -44,6 +44,7 @@ $ spc-generator
 
 #### Option 2 - Run the generator and connect to a hosted evaluator process running on an AWS EC2 server
 ```bash
+# NOTE: I have stopping paying for this EC2 instance.
 # Install the npm module globally (may need to run as root via sudo)
 $ npm install simple-producer-consumer@latest -g
 # Start the generator process (in a different terminal window)
@@ -59,6 +60,14 @@ $ npm install .
 $ npm run evaluator
 # Start the generator
 $ npm run generator
+```
+
+#### Option 4 - Docker
+(Image is built by Jenkins after successful test run)
+```bash
+$ docker pull cflynnus/simple-producer-consumer
+$ docker run --name evaluator cflynnus/simple-producer-consumer npm run evaluator
+$ docker run --link evaluator:evaluator --name generator -e SPC_SERVER_HOST=evaluator cflynnus/simple-producer-consumer npm run generator # in separate terminal
 ```
 
 Tests
